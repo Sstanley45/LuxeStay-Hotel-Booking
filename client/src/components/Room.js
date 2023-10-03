@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
-import { Link } from 'react-router-dom'; 
+import { Link } from "react-router-dom";
 
-
-const Room = ({ room }) => {
+const Room = ({ room, fromDate, toDate }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -23,9 +22,12 @@ const Room = ({ room }) => {
         </b>
 
         <div style={{ float: "right" }}>
-          <Link to={`/bookingscreen/${room._id}`}>
-            <button className="btn btn-secondary">Book Now</button>
-          </Link>
+          {(fromDate && toDate) && ( 
+            <Link to={`/bookingscreen/${room._id}/${fromDate}/${toDate}`}>
+              <button className="btn btn-secondary">Book Now</button>
+            </Link>
+          )}
+
           <button className="btn btn-secondary" onClick={handleShow}>
             View Details
           </button>
@@ -38,9 +40,9 @@ const Room = ({ room }) => {
         </Modal.Header>
         <Modal.Body>
           <Carousel>
-            {room.imageurls.map((url,i) => {
+            {room.imageurls.map((url, i) => {
               return (
-                <Carousel.Item key={i}> 
+                <Carousel.Item key={i}>
                   <img src={url} className="d-block w-100 bigimg" />
                 </Carousel.Item>
               );

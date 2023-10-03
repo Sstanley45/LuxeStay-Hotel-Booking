@@ -7,24 +7,35 @@ import BookingScreen from "./screens/BookingScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import Verify from "./screens/Verify";
+import ResetPassword from "./screens/ResetPassword";
+import ForgotPassword from "./screens/ForgotPassword";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container">
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/home" element={<HomeScreen />}></Route>
-          <Route
-            exact
-            path="/bookingscreen/:id"
-            element={<BookingScreen />}
-          ></Route>
-          <Route exact path="/register" element={<RegisterScreen />}></Route>
-          <Route exact path="/login" element={<LoginScreen />}></Route>
-          <Route exact path="/user/verify-email" element={<Verify />}></Route>
-        </Routes>
-      </BrowserRouter>
+
+      <Routes>
+        <Route exact path="/home" element={<HomeScreen />}></Route>
+        <Route
+          exact
+          path="/bookingscreen/:id/:fromDate/:toDate"
+          element={<BookingScreen />}
+        ></Route>
+        <Route exact path="/register" element={<RegisterScreen />}></Route>
+        <Route exact path="/login" element={<LoginScreen />}></Route>
+        <Route exact path="/user/verify-email" element={<Verify />}></Route>
+        <Route
+          exact
+          path="/user/reset-password"
+          element={<ResetPassword />}
+        ></Route>
+        <Route
+          exact
+          path="/user/forgot-password"
+          element={<ForgotPassword />}
+        ></Route>
+      </Routes>
     </div>
   );
 }

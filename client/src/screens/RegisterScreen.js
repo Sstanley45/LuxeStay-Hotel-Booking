@@ -27,11 +27,13 @@ const RegisterScreen = () => {
     if (!name || !email || !password || !confirmPassword) {
       setShowAlert(true);
       hideAlert();
+      setLoading(false);
       return;
     }
     if (password !== confirmPassword) {
       setPasswordMismatch(true);
       hidePasswordAlert();
+      setLoading(false);
       return;
     } else {
       const user = {
@@ -138,8 +140,9 @@ const RegisterScreen = () => {
                 className="btn btn-primary mt-3"
                 type="submit"
                 onClick={register}
+                disabled ={loading}
               >
-                {loading ? "loading.. please wait.." : "submit"}
+                {loading ? "loading.." : "submit"}
               </button>
               <p>
                 Already have an account? <a href="/login">login</a>

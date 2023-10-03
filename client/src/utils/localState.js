@@ -7,6 +7,7 @@ const useLocalState = () => {
         text: '',
         type : 'danger', 
     })
+    
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -15,12 +16,14 @@ const useLocalState = () => {
         setAlert({show : true, text, type})
     }
     const hideLocalAlert = () => {
-        setAlert({ show: false, text: '', type: 'danger' });
+        setTimeout(() => {
+            setAlert({ show: false, text: "", type: "danger" });
+        },3000)
     }
 
     return {
         alert,
-        showLocalAlert,
+        showLocalAlert, 
         loading,
         setLoading,
         success,

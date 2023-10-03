@@ -3,6 +3,13 @@
 * {
   box-sizing: border-box;
 }
+.container{
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
 
 body {
   margin: 0;
@@ -55,9 +62,7 @@ h2{
   font-weight: bold !important;
   text-align: center;
 }
-.alert-danger{
-  color: red;
-}
+
 
 /* localStateAlert */
 .alert-local {
@@ -72,14 +77,17 @@ h2{
 }
 
 .alert-local-danger {
-  color: var(--red-dark);
+  color: red;
   background: var(--red-light);
 }
 .alert-local-success {
-  color: var(--green-dark);
+  color: darkgreen;
   background: var(--green-light);
 }
 .verifyImage{
   width: 110px;
   height: 120px;
+}
+.dropdown-toggle{
+  border: 0px solid black !important;
 }
