@@ -36,7 +36,7 @@ const Navbar = () => {
                     {user.name}
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/bookings">
                       Bookings
                     </a>
                     <a class="dropdown-item" href="#" onClick={logOut}>

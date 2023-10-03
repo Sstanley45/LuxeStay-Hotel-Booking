@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import moment from "moment";
 import { useGlobalContext } from "../context";
 import useLocalState from "../utils/localState";
-import StripeCheckout from "react-stripe-checkout";
+import StripeCheckout from "react-stripe-checkout"; //a react package for stripe front end.
+import swal from "sweetalert2"; //a package fo js alerts
 
 const BookingScreen = () => {
+  const navigate = useNavigate();
   const { user } = useGlobalContext();
   const { alert, showLocalAlert, hideLocalAlert } = useLocalState();
   const { id, fromDate, toDate } = useParams();
@@ -44,7 +47,8 @@ const BookingScreen = () => {
     fetchSingleRoomDetails();
   }, [id]);
 
-  const bookRoom = async () => {
+  //function that books room and sends the payment intent(token) to the backend to handle stripe payment.
+  const onToken = async (token) => {
     const bookingDetails = {
       room: room.name,
       roomId: room._id,
@@ -53,23 +57,30 @@ const BookingScreen = () => {
       toDate,
       totalAmount,
       totalDays,
+      token,
     };
     try {
+      setLoading(true);
       const { data } = await axios.post(
         "/api/v1/bookings/bookroom",
         bookingDetails
       );
-      showLocalAlert({ text: data.msg, type: "success" });
-      hideLocalAlert();
+      setLoading(false);
+      //pop up an alert on success then redirect to a different route.. .then
+      swal.fire(data.msg, "success").then((res) => {
+        setTimeout(() => {
+          navigate("/bookings");
+        }, 1000);
+      });
+      // showLocalAlert({ text: data.msg, type: "success" });
+      // hideLocalAlert();
     } catch (error) {
+      setLoading(false);
+      swal.fire(error.response.data.msg, "error");
       console.log("err while booking room: ", error);
-      showLocalAlert({ text: error.response.data.msg, type: "danger" });
-      hideLocalAlert();
+      // showLocalAlert({ text: error.response.data.msg, type: "danger" });
+      // hideLocalAlert();
     }
-  };
-
-  const onToken = (token) => {
-    console.log(token);
   };
 
   return (
@@ -110,15 +121,14 @@ const BookingScreen = () => {
                 </b>
               </div>
               <div style={{ float: "right" }}>
-                <button className="btn btn-primary" onClick={bookRoom}>
-                  Pay now
-                </button>
                 <StripeCheckout
                   token={onToken}
                   amount={totalAmount * 100}
                   currency="KES"
                   stripeKey="pk_test_51NgCdvBTTWsEUllBkVdircAKppOrZbSkirkYYrQ3YMQj4OvvkUQzHjjSlB5V3FeTgkXnLl0RpUJgfqREifyzmgaR00CWd5kl9D"
-                />
+                >
+                  <button className="btn btn-primary">Pay now</button>
+                </StripeCheckout>
               </div>
             </div>
           </div>
