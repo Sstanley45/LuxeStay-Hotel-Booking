@@ -27,6 +27,33 @@ const getSingleRoom = async (req, res) => {
   res.status(StatusCodes.OK).json(room);
 };
 
+const createRoom = async (req, res) => {
+  const {
+    name,
+    rentperday,
+    maxcount,
+    description,
+    phonenumber,
+    type,
+    imageurls,
+  } = req.body;
+  if (!name || !rentperday || !maxcount || !description || !phonenumber || !type || !imageurls) {
+    throw new BadRequestError('please fill all values')
+  }
+  const room = await Room.create({
+    name,
+    rentperday,
+    maxcount,
+    description,
+    phonenumber,
+    type,
+    imageurls,
+  });
+
+  res.status(StatusCodes.CREATED).json({msg : "success! room Added"})
+  
+}
+
 ////get all bookings
 const getAllBookings = async (req, res) => {
   const allBookings = await Bookings.find();
@@ -136,4 +163,5 @@ module.exports = {
   getUserBookings,
   cancelBooking,
   getAllBookings,
+  createRoom,
 };

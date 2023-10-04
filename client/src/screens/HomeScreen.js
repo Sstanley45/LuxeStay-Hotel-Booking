@@ -137,7 +137,7 @@ const HomeScreen = () => {
         <div className="row mt-5 bs m-auto">
           <div className="col-md-3">
             <RangePicker
-              className="cal"
+              className="cal homeScreen-input"
               format="DD-MM-YYYY"
               onChange={(values) => filterByDate(values)}
             />
@@ -145,7 +145,7 @@ const HomeScreen = () => {
           <div className="col-md-3 mx-auto">
             <input
               type="text"
-              className="form-control"
+              className="form-control homeScreen-input"
               placeholder="search rooms"
               value={searchKey}
               onChange={(e) => setSearchKey(e.target.value)}
@@ -156,7 +156,7 @@ const HomeScreen = () => {
             <select
               name=""
               id=""
-              className="from-control"
+              className="from-control homeScreen-input"
               value={type}
               onChange={(e) => filterByType(e.target.value)}
             >

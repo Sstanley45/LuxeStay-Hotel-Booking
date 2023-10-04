@@ -5,11 +5,12 @@ import { Tabs } from "antd";
 import axios from "axios";
 import Loader from "../components/Loader";
 import useLocalState from "../utils/localState";
-
-//include the logic to only allow admin privilleges
+import swal from "sweetalert2";
 
 const AdminScreen = () => {
   const navigate = useNavigate();
+
+  //include the logic to only allow admin privilleges
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem("user")).isAdmin) {
       navigate("/home");
@@ -30,7 +31,7 @@ const AdminScreen = () => {
             <AllRooms />
           </Tabs.TabPane>
           <Tabs.TabPane tab="Add Room" key="4">
-            <h1>Add Room</h1>
+            <AddRoom />
           </Tabs.TabPane>
           <Tabs.TabPane tab="Users" key="3">
             <AllUsers />
@@ -240,6 +241,133 @@ export const AllUsers = () => {
               })}
           </tbody>
         </table>
+      </div>
+    </div>
+  );
+};
+
+//add Room API
+export const AddRoom = () => {
+  const [name, setName] = useState("");
+  const [rentperday, setRentPerDay] = useState("");
+  const [maxcount, setMaxCount] = useState("");
+  const [description, setDescription] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [type, setType] = useState("");
+  const [imageUrl1, setImageUrl1] = useState("");
+  const [imageUrl2, setImageUrl2] = useState("");
+  const [imageUrl3, setImageUrl3] = useState("");
+  const [loading, setLoading] = useState(true);
+  const { alert, showLocalAlert, hideLocalAlert } = useLocalState();
+  const navigate = useNavigate();
+  const addRoomAPI = async () => {
+    const newRoom = {
+      name,
+      rentperday,
+      maxcount,
+      description,
+      phonenumber,
+      type,
+      imageurls: [imageUrl1, imageUrl2, imageUrl3],
+    };
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/v1/rooms/createRoom", newRoom);
+      const data = response.data;
+      swal.fire(data.msg, "success").then((res) => {
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
+      });
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      swal.fire(error.response.data.msg, "error");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      {alert.show && (
+        <div className={`alert-local alert-local-${alert.type}`}>
+          {alert.text}
+        </div>
+      )}
+      {loading && <loader />}
+      <div className="row">
+        <div className="col-md-5">
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="room name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="rent per day"
+            value={rentperday}
+            onChange={(e) => setRentPerDay(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="max count"
+            value={maxcount}
+            onChange={(e) => setMaxCount(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="phone number"
+            value={phonenumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </div>
+        <div className="col-md-5">
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="Image URL 1"
+            value={imageUrl1}
+            onChange={(e) => setImageUrl1(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="Image URL 2"
+            value={imageUrl2}
+            onChange={(e) => setImageUrl2(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control admin-input"
+            placeholder="Image URL 3"
+            value={imageUrl3}
+            onChange={(e) => setImageUrl3(e.target.value)}
+          />
+          <div className="text-right mt-3">
+            <button className="btn btn-primary" onClick={addRoomAPI}>
+              Add Room
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
