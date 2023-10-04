@@ -11,6 +11,7 @@ const { RangePicker } = DatePicker;
 
 const HomeScreen = () => {
   const { fetchUser } = useGlobalContext();
+  
   const [rooms, setRooms] = useState([]);
   const [duplicateRooms, setDuplicateRooms] = useState([]);
   const [loading, setLoading] = useState(true);

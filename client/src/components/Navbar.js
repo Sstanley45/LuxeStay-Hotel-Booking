@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
+
+
 const Navbar = () => {
-  const { saveUser, user, logOut } = useGlobalContext();
+    const { user, logOut } = useGlobalContext();
+ 
+  
+
+  
   return (
     <div>
       <nav class="navbar navbar-expand-lg ">
@@ -36,8 +42,8 @@ const Navbar = () => {
                     {user.name}
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/bookings">
-                      Bookings
+                    <a class="dropdown-item" href="/profile">
+                      Profile
                     </a>
                     <a class="dropdown-item" href="#" onClick={logOut}>
                       Log out

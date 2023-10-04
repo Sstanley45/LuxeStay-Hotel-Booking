@@ -7,6 +7,8 @@ const { v4: uuidv4 } = require("uuid");
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 const { StatusCodes } = require("http-status-codes");
+const { BadRequestError } = require("../errors");
+const booking = require("../models/booking");
 
 const getAllRooms = async (req, res) => {
   const rooms = await Room.find({});
@@ -25,6 +27,13 @@ const getSingleRoom = async (req, res) => {
   res.status(StatusCodes.OK).json(room);
 };
 
+////get all bookings
+const getAllBookings = async (req, res) => {
+  const allBookings = await Bookings.find();
+  res.status(StatusCodes.OK).json(allBookings);
+}
+
+//bookroom controller & Payment!
 const bookRoom = async (req, res) => {
   const {
     room,
@@ -89,7 +98,42 @@ const bookRoom = async (req, res) => {
   }
   res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .json({ msg: "An error occurred, try again" });   
+    .json({ msg: "An error occurred, try again" });
 };
 
-module.exports = { getAllRooms, getSingleRoom, bookRoom };
+//getBookings for a user
+
+const getUserBookings = async (req, res) => {
+  const { userID } = req.body;
+  const userBookings = await Bookings.find({ userId: userID });
+  if (!userBookings) {
+    throw new BadRequestError(`No bookings for user Id : ${userId}`);
+  }
+  res.status(StatusCodes.OK).json(userBookings);
+};
+
+const cancelBooking = async (req, res) => {
+  const { bookingId, roomId } = req.body;
+  const cancelledBooking = await Bookings.findOne({ _id: bookingId });
+  cancelledBooking.status = "cancelled";
+  await cancelledBooking.save();
+  //secondly we delete the booking from the currentbookings array in the room so as to make it available during filtering.
+  const roomWithTheCancelledBooking = await Room.findOne({ _id: roomId });
+  //grab the currentBooking array of the room
+  const currentBookingsOfRoom = roomWithTheCancelledBooking.currentbookings;
+  const filteredCurrentBookings = currentBookingsOfRoom.filter(
+    (booking) => booking.bookingId.toString() !== bookingId
+  );
+  roomWithTheCancelledBooking.currentbookings = filteredCurrentBookings;
+  await roomWithTheCancelledBooking.save();
+  res.status(StatusCodes.OK).json({ msg: "booking cancelled successfully!" });
+};
+
+module.exports = {
+  getAllRooms,
+  getSingleRoom,
+  bookRoom,
+  getUserBookings,
+  cancelBooking,
+  getAllBookings,
+};

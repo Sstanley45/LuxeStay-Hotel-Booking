@@ -69,7 +69,7 @@ const BookingScreen = () => {
       //pop up an alert on success then redirect to a different route.. .then
       swal.fire(data.msg, "success").then((res) => {
         setTimeout(() => {
-          navigate("/bookings");
+          navigate("/profile");
         }, 1000);
       });
       // showLocalAlert({ text: data.msg, type: "success" });

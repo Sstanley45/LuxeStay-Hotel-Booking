@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import useLocalState from "../utils/localState";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context";
+
 
 const LoginScreen = () => {
+  const { fetchUser } = useGlobalContext();
+  useEffect(() => {
+    fetchUser()
+  }, [])
+  
   const navigate = useNavigate();
 
   const {
     alert,
     showLocalAlert,
-    loading,
-    setLoading,
-    success,
-    setSuccess,
     hideLocalAlert,
   } = useLocalState();
 
@@ -37,7 +40,7 @@ const LoginScreen = () => {
     try {
       const response = await axios.post("/api/v1/auth/login", user);
       const data = await response;
-      console.log(data);
+     // console.log(data);
       showLocalAlert({ text: "logging in..", type: "success" });
       hideLocalAlert();
       setTimeout(() => {
@@ -46,8 +49,8 @@ const LoginScreen = () => {
       setEmail("");
       setPassword("");
     } catch (error) {
-      console.log("error when logging user", error);
-      console.log(error.response.data.msg);
+      //console.log("error when logging user", error);
+     // console.log(error.response.data.msg);
       showLocalAlert({ text: error.response.data.msg, type: "danger" });
       hideLocalAlert();
     }

@@ -9,6 +9,9 @@ import LoginScreen from "./screens/LoginScreen";
 import Verify from "./screens/Verify";
 import ResetPassword from "./screens/ResetPassword";
 import ForgotPassword from "./screens/ForgotPassword";
+import Profile from "./screens/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminScreen from "./screens/AdminScreen";
 
 function App() {
   return (
@@ -20,7 +23,11 @@ function App() {
         <Route
           exact
           path="/bookingscreen/:id/:fromDate/:toDate"
-          element={<BookingScreen />}
+          element={
+            <ProtectedRoute>
+              <BookingScreen />
+            </ProtectedRoute>
+          }
         ></Route>
         <Route exact path="/register" element={<RegisterScreen />}></Route>
         <Route exact path="/login" element={<LoginScreen />}></Route>
@@ -35,6 +42,17 @@ function App() {
           path="/user/forgot-password"
           element={<ForgotPassword />}
         ></Route>
+
+        <Route
+          exact
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route exact path='/admin' element={<AdminScreen />}></Route>
       </Routes>
     </div>
   );
