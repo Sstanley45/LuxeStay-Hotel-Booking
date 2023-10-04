@@ -12,6 +12,7 @@ import ForgotPassword from "./screens/ForgotPassword";
 import Profile from "./screens/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminScreen from "./screens/AdminScreen";
+import LandingScreen from "./screens/LandingScreen";
 
 function App() {
   return (
@@ -19,7 +20,16 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route exact path="/home" element={<HomeScreen />}></Route>
+        <Route exact path="/" element={<LandingScreen />}></Route>
+        <Route
+          exact
+          path="/home"
+          element={
+        
+              <HomeScreen />
+          
+          }
+        ></Route>
         <Route
           exact
           path="/bookingscreen/:id/:fromDate/:toDate"
@@ -52,7 +62,7 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
-        <Route exact path='/admin' element={<AdminScreen />}></Route>
+        <Route exact path="/admin" element={<AdminScreen />}></Route>
       </Routes>
     </div>
   );

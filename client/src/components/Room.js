@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init({
+  duration: 300,
+}); // gotten from aos sit-github
 
 const Room = ({ room, fromDate, toDate }) => {
   const [show, setShow] = useState(false);
@@ -9,7 +15,7 @@ const Room = ({ room, fromDate, toDate }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <div className="row bs">
+    <div className="row bs" data-aos="fade-up"> 
       <div className="col-md-4">
         <img src={room.imageurls[0]} className="smallimg" />
       </div>
@@ -22,7 +28,7 @@ const Room = ({ room, fromDate, toDate }) => {
         </b>
 
         <div style={{ float: "right" }}>
-          {(fromDate && toDate) && ( 
+          {fromDate && toDate && (
             <Link to={`/bookingscreen/${room._id}/${fromDate}/${toDate}`}>
               <button className="btn btn-secondary">Book Now</button>
             </Link>

@@ -11,9 +11,11 @@ const ProtectedRoute = ({ children }) => {
     if (!user) {
         setTimeout(() => {
             navigate('/login')
-        },1000)
+        }, 1000)
+        return;
+    } else {
+        return (children)
     }
-  return (children)
 };
 
 export default ProtectedRoute;

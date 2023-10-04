@@ -5,20 +5,15 @@ import useLocalState from "../utils/localState";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
-
 const LoginScreen = () => {
-  const { fetchUser } = useGlobalContext();
+  const { fetchUser, saveUser } = useGlobalContext();
   useEffect(() => {
-    fetchUser()
-  }, [])
-  
+    fetchUser();
+  }, []);
+
   const navigate = useNavigate();
 
-  const {
-    alert,
-    showLocalAlert,
-    hideLocalAlert,
-  } = useLocalState();
+  const { alert, showLocalAlert, hideLocalAlert } = useLocalState();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,8 +34,10 @@ const LoginScreen = () => {
 
     try {
       const response = await axios.post("/api/v1/auth/login", user);
-      const data = await response;
-     // console.log(data);
+      const data = response.data;
+      // console.log(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      //saveUser(data.user)
       showLocalAlert({ text: "logging in..", type: "success" });
       hideLocalAlert();
       setTimeout(() => {
@@ -50,8 +47,8 @@ const LoginScreen = () => {
       setPassword("");
     } catch (error) {
       //console.log("error when logging user", error);
-     // console.log(error.response.data.msg);
-      showLocalAlert({ text: error.response.data.msg, type: "danger" });
+      console.log(error.response.data.msg);
+      showLocalAlert({ text: "error logging in", type: "danger" });
       hideLocalAlert();
     }
   };

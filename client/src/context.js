@@ -20,7 +20,7 @@ const AppProvider = ({ children }) => {
     try {
       const { data } = await axios.get("/api/v1/users/showMe");
     //  console.log(data.user);
-      saveUser(data.user);
+      saveUser(data.user); 
       localStorage.setItem('user', JSON.stringify(data.user));
     } catch (error) {
       // removeUser();

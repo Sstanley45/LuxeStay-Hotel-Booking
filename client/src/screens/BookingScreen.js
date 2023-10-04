@@ -84,7 +84,7 @@ const BookingScreen = () => {
   };
 
   return (
-    <div className="m-5">
+    <div className="m-5" data-aos='flip-left'>
       {alert.show && (
         <div className={`alert-local alert-local-${alert.type}`}>
           {alert.text}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Room from "../components/Room";
 import Loader from "../components/Loader";
@@ -10,6 +11,13 @@ import moment from "moment";
 const { RangePicker } = DatePicker;
 
 const HomeScreen = () => {
+  const navigate = useNavigate();
+
+    useEffect(() => {
+      if (!JSON.parse(localStorage.getItem("user"))) {
+        navigate("/login");
+      }
+    }, []);
   const { fetchUser } = useGlobalContext();
   
   const [rooms, setRooms] = useState([]);
