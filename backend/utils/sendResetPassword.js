@@ -5,9 +5,11 @@ const sendResetPassword = async ({ name, email, token, origin }) => {
   const message = `<p>Please reset password by clicking on the following link:  <a href="${resetEmail}">Reset Password</a> </p>`;
 
   return sendEmail({
+    name,
     to: email,
     subject: "Reset Password",
-    html: `<h4>Hello, ${name}</h4> ${message}`,
+    message: message,
+    // html: `<h4>Hello, ${name}</h4> ${message}`,
   });
 };
 

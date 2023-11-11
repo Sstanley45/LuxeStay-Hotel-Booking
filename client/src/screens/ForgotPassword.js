@@ -44,11 +44,11 @@ const ForgotPassword = () => {
         {alert.show && (
           <div className={`alert alert-${alert.type}`}>{alert.text} </div>
         )}
-        <h2>Forgot Password</h2>
-        <h4 style={{ textAlign: "center" }}>Enter Your Email</h4>
+
         {!success && (
           <div className="col-md-5">
             <div className="bs">
+              <h2>Forgot Password?</h2>
               <input
                 type="email"
                 className="form-control"

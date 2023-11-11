@@ -8,12 +8,12 @@ const morgan = require("morgan");
 const connectDB = require("./db/connect");
 const cookieParser = require("cookie-parser");
 // const roomModel = require("./models/room");
-// const data = require("./data.json");
+// const roomsData = require("./roomsData.json");
 
 const roomRouter = require("./routes/roomRoutes");
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRouter");
-const bookingRouter = require("./routes/bookingRoutes")
+const bookingRouter = require("./routes/bookingRoutes");
 
 //middlewares
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -29,7 +29,6 @@ app.use("/api/v1/rooms", roomRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/bookings", bookingRouter);
 
-
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
@@ -41,7 +40,7 @@ const start = async () => {
     console.log("connected to db..");
     // ---populating the database with data---
     // await roomModel.deleteMany();
-    // await roomModel.create(data);
+    // await roomModel.create(roomsData);
     // process.exit(0);
     app.listen(port, () => console.log(`server listening on port ${port}...`));
   } catch (error) {

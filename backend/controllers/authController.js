@@ -26,7 +26,7 @@ const register = async (req, res) => {
 
   const user = await User.create({ name, email, password, verificationToken });
 
-  const origin = "http://localhost:3000/";
+  const origin = process.env.HOST_URL
   //send back an email telling the user to check email for verification
   await sendVerificationToken({
     name: user.name,
@@ -137,7 +137,7 @@ const forgotPassword = async (req, res) => {
     const passwordTokenExpirationDate = new Date(Date.now() + tenMinutes);
 
     //send Email to user;
-    const origin = "http://localhost:3000/";
+    const origin = process.env.HOST_URL
     await sendResetPasswordEmail({
       name: user.name,
       email: user.email,

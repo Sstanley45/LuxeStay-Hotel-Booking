@@ -55,9 +55,10 @@ const ResetPassword = () => {
         {alert.show && (
           <div className={`alert alert-${alert.type}`}>{alert.text} </div>
         )}
-        <h2>Reset Password</h2>
+
         {!success && (
           <div className="col-md-5">
+            <h2>Reset Password</h2> 
             <div className="bs">
               <input
                 type="password"
