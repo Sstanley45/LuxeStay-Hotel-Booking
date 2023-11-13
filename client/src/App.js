@@ -21,9 +21,8 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<LandingScreen />}></Route>
-        <Route exact path="/home" element={<HomeScreen />}></Route>
+        <Route path="/home" element={<HomeScreen />}></Route>
         <Route
-          exact
           path="/bookingscreen/:id/:fromDate/:toDate"
           element={
             <ProtectedRoute>
@@ -31,22 +30,16 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
-        <Route exact path="/register" element={<RegisterScreen />}></Route>
-        <Route exact path="/login" element={<LoginScreen />}></Route>
-        <Route exact path="/user/verify-email" element={<Verify />}></Route>
+        <Route path="/register" element={<RegisterScreen />}></Route>
+        <Route path="/login" element={<LoginScreen />}></Route>
+        <Route path="/user/verify-email" element={<Verify />}></Route>
+        <Route path="/user/reset-password" element={<ResetPassword />}></Route>
         <Route
-          exact
-          path="/user/reset-password"
-          element={<ResetPassword />}
-        ></Route>
-        <Route
-          exact
           path="/user/forgot-password"
           element={<ForgotPassword />}
         ></Route>
 
         <Route
-          exact
           path="/profile"
           element={
             <ProtectedRoute>
@@ -54,7 +47,7 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
-        <Route exact path="/admin" element={<AdminScreen />}></Route>
+        <Route path="/admin" element={<AdminScreen />}></Route>
       </Routes>
     </div>
   );
