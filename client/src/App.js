@@ -19,7 +19,7 @@ function App() {
     <div className="App container">
       <Navbar />
 
-      <Routes basename="/">
+      <Routes>
         <Route exact path="/" element={<LandingScreen />}></Route>
         <Route exact path="/home" element={<HomeScreen />}></Route>
         <Route
