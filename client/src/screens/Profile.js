@@ -17,16 +17,16 @@ const Profile = () => {
    return setUser(currentUser)
   }
 
-  
+
   return (
     <div className="ml-3 mt-3">
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab="Profile" key="1">
           <h1> Profile </h1>
           <br />
-          <h1>Name: {user.name}</h1>
-          <h1>Email: {user.email}</h1>
-          <h1>isAdmin: {user.isAdmin ? "Yes" : "No"}</h1>
+          <h1>Name: {user?.name}</h1>
+          <h1>Email: {user?.email}</h1>
+          <h1>isAdmin: {user?.isAdmin ? "Yes" : "No"}</h1>
 
           {/* //you can directly write html or render component */}
         </Tabs.TabPane>
