@@ -19,17 +19,9 @@ function App() {
     <div className="App container">
       <Navbar />
 
-      <Routes>
+      <Routes basename="/">
         <Route exact path="/" element={<LandingScreen />}></Route>
-        <Route
-          exact
-          path="/home"
-          element={
-        
-              <HomeScreen />
-          
-          }
-        ></Route>
+        <Route exact path="/home" element={<HomeScreen />}></Route>
         <Route
           exact
           path="/bookingscreen/:id/:fromDate/:toDate"
