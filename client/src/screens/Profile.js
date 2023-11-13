@@ -8,16 +8,9 @@ import Swal from "sweetalert2";
 import { Tag } from "antd";
 
 //profile page is a protected route so a user is required!
-// const user = JSON.parse(localStorage.getItem("user")) 
+const user = JSON.parse(localStorage.getItem("user"));
 
 const Profile = () => {
-  const [user, setUser] = useState(null)
-  const currentUser = JSON.parse(localStorage.getItem("user"))
-  if (currentUser) {
-   return setUser(currentUser)
-  }
-
-
   return (
     <div className="ml-3 mt-3">
       <Tabs defaultActiveKey="1">
