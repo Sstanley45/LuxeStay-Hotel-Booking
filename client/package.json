@@ -45,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://luxe-stay-hotel-booking.vercel.app"
+  "proxy": "http://localhost:4000"
 }

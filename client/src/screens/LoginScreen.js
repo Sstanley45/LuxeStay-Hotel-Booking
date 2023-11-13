@@ -48,7 +48,7 @@ const LoginScreen = () => {
     } catch (error) {
       //console.log("error when logging user", error);
       console.log(error.response.data.msg);
-      showLocalAlert({ text: "error logging in", type: "danger" });
+      showLocalAlert({ text: error.response.data.msg, type: "danger" });
       hideLocalAlert();
     }
   };

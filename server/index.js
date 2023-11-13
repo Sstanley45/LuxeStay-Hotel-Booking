@@ -29,6 +29,10 @@ app.use("/api/v1/rooms", roomRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/bookings", bookingRouter);
 
+app.get("/", (req, res) => {
+  res.send("SERVER IS LISTENING...");
+});
+
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
