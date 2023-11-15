@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 
 const morgan = require("morgan");
+const cors = require("cors");
 
 const connectDB = require("./db/connect");
 const cookieParser = require("cookie-parser");
@@ -18,6 +19,12 @@ const bookingRouter = require("./routes/bookingRoutes");
 //middlewares
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const notFoundMiddleware = require("./middleware/notFound");
+
+app.use(
+  cors({
+    origin: "http://localhost:5173/",
+  })
+);
 
 app.use(morgan("tiny"));
 app.use(express.json());
