@@ -33,7 +33,10 @@ const LoginScreen = () => {
     };
 
     try {
-      const response = await axios.post("/api/v1/auth/login", user);
+      const response = await axios.post(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/auth/login",
+        user
+      );
       const data = response.data;
       // console.log(data.user);
       localStorage.setItem("user", JSON.stringify(data.user));

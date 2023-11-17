@@ -44,7 +44,10 @@ const RegisterScreen = () => {
       };
 
       try {
-        const response = await axios.post("/api/v1/auth/register", user);
+        const response = await axios.post(
+          "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/auth/register",
+          user
+        );
         setSuccess(true);
         setName("");
         setEmail("");

@@ -34,7 +34,9 @@ const HomeScreen = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("/api/v1/rooms/getAllRooms");
+      const response = await axios.get(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/rooms/getAllRooms"
+      );
       const data = await response.data; //axios already parse the data into json so I avoid using .json()
       setRooms(data);
       setDuplicateRooms(data); //we create a state to hold rooms so that we can manipulate it in the filtering function to avoid manipulating the original rooms array.

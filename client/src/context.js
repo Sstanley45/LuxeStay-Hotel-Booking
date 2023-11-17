@@ -13,25 +13,29 @@ const AppProvider = ({ children }) => {
   };
   const removeUser = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
   };
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("/api/v1/users/showMe");
-    //  console.log(data.user);
-      saveUser(data.user); 
-      localStorage.setItem('user', JSON.stringify(data.user));
+      const { data } = await axios.get(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/users/showMe"
+      );
+      //  console.log(data.user);
+      saveUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
     } catch (error) {
       // removeUser();
-     // console.log('err while fetching user',error);
+      // console.log('err while fetching user',error);
     }
   };
   const logOut = async () => {
     try {
-      await axios.delete("/api/v1/auth/logout");
+      await axios.delete(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/auth/logout"
+      );
       removeUser();
-       localStorage.removeItem("user");
+      localStorage.removeItem("user");
       setTimeout(() => {
         navigate("/login");
       }, 2000);

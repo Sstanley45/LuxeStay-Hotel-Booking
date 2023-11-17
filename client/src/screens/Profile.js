@@ -10,6 +10,7 @@ import { Tag } from "antd";
 //profile page is a protected route so a user is required!
 const user = JSON.parse(localStorage.getItem("user"));
 
+
 const Profile = () => {
   return (
     <div className="ml-3 mt-3">
