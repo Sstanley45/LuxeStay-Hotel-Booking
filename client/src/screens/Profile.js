@@ -12,12 +12,11 @@ import { Tag } from "antd";
 // const user = JSON.parse(localStorage.getItem("user"));
 
 const Profile = () => {
-  const userString = localStorage.getItem("user");
-  const user = userString ? JSON.parse(userString) : null;
-
   const navigate = useNavigate();
 
   useEffect(() => {
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
     if (!user) {
       return navigate("/login");
       // return  window.location.href='/login'
