@@ -19,10 +19,13 @@ const VerifyPage = () => {
   const verifyToken = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/v1/auth/verify-email", {
-        email: query.get("email"),
-        verificationToken: query.get("token"),
-      });
+      const response = await axios.post(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/auth/verify-email",
+        {
+          email: query.get("email"),
+          verificationToken: query.get("token"),
+        }
+      );
       const data = await response.data;
       
       setVerifySuccessMsg(data.msg);

@@ -20,9 +20,12 @@ const ForgotPassword = () => {
       return;
     }
     try {
-      const { data } = await axios.post("/api/v1/auth/forgot-password", {
-        email,
-      });
+      const { data } = await axios.post(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/auth/forgot-password",
+        {
+          email,
+        }
+      );
       showLocalAlert({ text: data.msg, type: "success" });
       setSuccess(true);
     } catch (error) {

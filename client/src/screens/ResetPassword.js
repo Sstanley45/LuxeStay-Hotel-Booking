@@ -25,11 +25,14 @@ const ResetPassword = () => {
       return;
     }
     try {
-      const { data } = await axios.post("/api/v1/auth/reset-password", {
-        password,
-        token: query.get("token"),
-        email: query.get("email"),
-      });
+      const { data } = await axios.post(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/auth/reset-password",
+        {
+          password,
+          token: query.get("token"),
+          email: query.get("email"),
+        }
+      );
       setLoading(false);
       setSuccess(true);
       showLocalAlert({

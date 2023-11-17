@@ -12,7 +12,9 @@ const AdminScreen = () => {
 
   //include the logic to only allow admin privilleges
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("user")).isAdmin) {
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    if (!user.isAdmin) {
       navigate("/home");
     }
   }, []);
@@ -53,7 +55,9 @@ export const AllBookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get("/api/v1/bookings/getAllBookings");
+      const response = await axios.get(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/bookings/getAllBookings"
+      );
       const data = response.data;
       // console.log(data);
       setAllBookings(data);
@@ -122,7 +126,9 @@ export const AllRooms = () => {
 
   const fetchRooms = async () => {
     try {
-      const response = await axios.get("/api/v1/rooms/getAllRooms");
+      const response = await axios.get(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/rooms/getAllRooms"
+      );
       const data = response.data;
       // console.log(data);
       setAllRooms(data);
@@ -190,7 +196,9 @@ export const AllUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("/api/v1/users/getAllUsers");
+      const response = await axios.get(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/users/getAllUsers"
+      );
       const data = response.data;
       // console.log(data);
       setAllUsers(data);
@@ -272,7 +280,10 @@ export const AddRoom = () => {
     };
     try {
       setLoading(true);
-      const response = await axios.post("/api/v1/rooms/createRoom", newRoom);
+      const response = await axios.post(
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/rooms/createRoom",
+        newRoom
+      );
       const data = response.data;
       swal.fire(data.msg, "success").then((res) => {
         setTimeout(() => {

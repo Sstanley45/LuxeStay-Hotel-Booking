@@ -29,7 +29,9 @@ const BookingScreen = () => {
   const fetchSingleRoomDetails = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/v1/rooms/getSingleRoom/${id}`);
+      const response = await axios.get(
+        `https://luxe-stay-hotel-booking-api.vercel.app/api/v1/rooms/getSingleRoom/${id}`
+      );
       const data = await response.data;
       // console.log(data);
       setRoom(data);
@@ -62,7 +64,7 @@ const BookingScreen = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "/api/v1/bookings/bookroom",
+        "https://luxe-stay-hotel-booking-api.vercel.app/api/v1/bookings/bookroom",
         bookingDetails
       );
       setLoading(false);

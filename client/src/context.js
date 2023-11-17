@@ -23,10 +23,12 @@ const AppProvider = ({ children }) => {
       );
       //  console.log(data.user);
       saveUser(data.user);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
     } catch (error) {
       // removeUser();
-      // console.log('err while fetching user',error);
+       console.log('err while fetching user',error); 
     }
   };
   const logOut = async () => {
