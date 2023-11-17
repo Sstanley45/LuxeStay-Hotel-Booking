@@ -15,15 +15,14 @@ const HomeScreen = () => {
 
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
-  
+
   useEffect(() => {
-      if (!user) {
-        navigate("/login");
-      }
-    
-    }, []);
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
   const { fetchUser } = useGlobalContext();
-  
+
   const [rooms, setRooms] = useState([]);
   const [duplicateRooms, setDuplicateRooms] = useState([]);
   const [loading, setLoading] = useState(true);
