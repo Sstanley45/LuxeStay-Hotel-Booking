@@ -14,14 +14,12 @@ import { Tag } from "antd";
 const Profile = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userString = localStorage.getItem("user");
-    const user = userString ? JSON.parse(userString) : null;
-    if (!user) {
-      return navigate("/login");
-      // return  window.location.href='/login'
-    }
-  }, []);
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+  if (!user) {
+    return navigate("/login");
+    // return  window.location.href='/login'
+  }
 
   // if (!user) {
   //   return navigate("/login");
