@@ -17,15 +17,16 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!user) {
-  //   return  window.location.href='/login'
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!user) {
+      return navigate("/login");
+      // return  window.location.href='/login'
+    }
+  }, []);
 
-  if (!user) {
-    return navigate("/login");
-  }
+  // if (!user) {
+  //   return navigate("/login");
+  // }
 
   return (
     <div className="ml-3 mt-3">
