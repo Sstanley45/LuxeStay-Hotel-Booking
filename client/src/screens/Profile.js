@@ -9,9 +9,12 @@ import Swal from "sweetalert2";
 import { Tag } from "antd";
 
 //profile page is a protected route so a user is required!
+// const user = JSON.parse(localStorage.getItem("user"));
 
 const Profile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -20,7 +23,7 @@ const Profile = () => {
   //   }
   // }, [])
 
-  if (user === undefined) {
+  if (!user) {
     return navigate("/login");
   }
 
