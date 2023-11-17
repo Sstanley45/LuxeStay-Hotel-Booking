@@ -22,11 +22,10 @@ const notFoundMiddleware = require("./middleware/notFound");
 
 app.use(
   cors({
-    origin: "http://localhost:5173/",
+    origin: "https://luxe-stay-hotel-booking-client-cekt8j7qp.vercel.app/",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   })
 );
-
 
 app.use(morgan("tiny"));
 app.use(express.json());
