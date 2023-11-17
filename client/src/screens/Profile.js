@@ -14,11 +14,11 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const Profile = () => {
 
-  useEffect(() => {
-    if (!user) {
-    return  window.location.href='/login'
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!user) {
+  //   return  window.location.href='/login'
+  //   }
+  // }, [])
 
 
   
