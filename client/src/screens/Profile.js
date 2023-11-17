@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Tabs } from "antd";
 import { useGlobalContext } from "../context";
 import useLocalState from "../utils/localState";
@@ -10,9 +11,8 @@ import { Tag } from "antd";
 //profile page is a protected route so a user is required!
 const user = JSON.parse(localStorage.getItem("user"));
 
-
-
 const Profile = () => {
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (!user) {
@@ -20,8 +20,10 @@ const Profile = () => {
   //   }
   // }, [])
 
+  if (!user) {
+    return navigate("/login"); 
+  }
 
-  
   return (
     <div className="ml-3 mt-3">
       <Tabs defaultActiveKey="1">
