@@ -8,17 +8,19 @@ import Swal from "sweetalert2";
 import { Tag } from "antd";
 
 //profile page is a protected route so a user is required!
+const user = JSON.parse(localStorage.getItem("user"));
 
 
 
 const Profile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (!user) {
-      window.location.href='/login'
+    return  window.location.href='/login'
     }
   }, [])
+
+
   
   return (
     <div className="ml-3 mt-3">
