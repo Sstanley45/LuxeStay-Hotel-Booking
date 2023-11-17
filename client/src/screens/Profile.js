@@ -15,7 +15,9 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const userString = localStorage.getItem("user");
+  console.log("userString>>>>>", userString);
   const user = userString ? JSON.parse(userString) : null;
+
   if (!user) {
     return navigate("/login");
     // return  window.location.href='/login'
