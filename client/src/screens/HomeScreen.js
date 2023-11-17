@@ -13,10 +13,14 @@ const { RangePicker } = DatePicker;
 const HomeScreen = () => {
   const navigate = useNavigate();
 
-    useEffect(() => {
-      if (!JSON.parse(localStorage.getItem("user"))) {
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+  
+  useEffect(() => {
+      if (!user) {
         navigate("/login");
       }
+    
     }, []);
   const { fetchUser } = useGlobalContext();
   
